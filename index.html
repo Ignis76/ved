@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VED School - Школа цифровых профессий</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%);
+        }
+        
+        .course-card {
+            transition: all 0.3s ease-in-out;
+        }
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #4f46e5;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-btn-primary:hover {
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+        .hero-btn-secondary:hover {
+            background-color: white;
+            color: #4f46e5;
+            box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .teacher-placeholder {
+            background-size: cover;
+            background-position: center;
+            background-image: linear-gradient(45deg, #e0e7ff 0%, #c7d2fe 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-6 py-5 border-b border-gray-100">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl shadow-md">V</div>
+                    <span class="ml-3 text-2xl font-extrabold text-gray-800">VED School</span>
+                </div>
+                
+                <nav class="hidden md:flex space-x-10">
+                    <a href="#courses" class="nav-link text-gray-700 hover:text-indigo-600 font-semibold transition duration-300">Курсы</a>
+                    <a href="#advantages" class="nav-link text-gray-700 hover:text-indigo-600 font-semibold transition duration-300">Преимущества</a>
+                    <a href="#reviews" class="nav-link text-gray-700 hover:text-indigo-600 font-semibold transition duration-300">Отзывы</a>
+                    <a href="#teachers" class="nav-link text-gray-700 hover:text-indigo-600 font-semibold transition duration-300">Преподаватели</a>
+                    <a href="#contacts" class="nav-link text-gray-700 hover:text-indigo-600 font-semibold transition duration-300">Контакты</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="#contacts" class="hidden md:block px-6 py-2 bg-indigo-600 text-white rounded-full font-medium hover:bg-indigo-700 transition duration-300 shadow-md hover:shadow-lg">Регистрация</a>
+                    <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none hover:text-indigo-600 transition duration-300">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 md:hidden">
+        <div class="flex justify-end p-6">
+            <button id="mobile-menu-close" class="text-gray-600 focus:outline-none hover:text-indigo-600 transition duration-300">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col items-center space-y-8 py-10">
+            <a href="#courses" class="mobile-nav-link text-gray-700 hover:text-indigo-600 text-2xl font-medium">Курсы</a>
+            <a href="#advantages" class="mobile-nav-link text-gray-700 hover:text-indigo-600 text-2xl font-medium">Преимущества</a>
+            <a href="#reviews" class="mobile-nav-link text-gray-700 hover:text-indigo-600 text-2xl font-medium">Отзывы</a>
+            <a href="#teachers" class="mobile-nav-link text-gray-700 hover:text-indigo-600 text-2xl font-medium">Преподаватели</a>
+            <a href="#contacts" class="mobile-nav-link text-gray-700 hover:text-indigo-600 text-2xl font-medium">Контакты</a>
+            <a href="#contacts"class="mobile-nav-link px-8 py-3 bg-indigo-600 text-white rounded-full font-medium text-center hover:bg-indigo-700 transition duration-300 mt-8 shadow-md hover:shadow-lg">Регистрация</a>       
+        </nav>
+    </div>
+
+    <div class="hidden md:block">
+        <section class="h-screen gradient-bg text-white flex items-center">
+            <div class="container mx-auto px-12">
+                <div class="flex md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0 pr-10">
+                        <h1 class="text-5xl font-bold leading-tight mb-6 tracking-tight">Стань востребованным специалистом в digital-сфере</h1>
+                        <p class="text-xl mb-10 opacity-90 leading-relaxed">Практические курсы от экспертов с трудоустройством. Освойте профессию мечты всего за несколько месяцев!</p>
+                        <div class="flex sm:flex-row space-x-4">
+                            <a href="#courses" class="px-10 py-4 bg-white text-indigo-600 rounded-full font-semibold text-center hero-btn-primary transition duration-300">Выбрать курс</a>
+                            <a href="#contacts" class="px-10 py-4 border-2 border-white text-white rounded-full font-semibold text-center hero-btn-secondary transition duration-300">Бесплатная консультация</a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Обучение в VED School" class="rounded-xl shadow-2xl w-full max-w-2xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="md:hidden">
+        <section class="gradient-bg text-white pt-32 pb-16 min-h-screen flex flex-col justify-between">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col items-center text-center">
+                    <h1 class="text-4xl font-bold leading-tight mb-6 max-w-2xl">Стань востребованным специалистом в digital-сфере</h1>
+                    <p class="text-xl mb-8 opacity-90 max-w-2xl leading-relaxed">Практические курсы от экспертов с трудоустройством. Освойте профессию мечты всего за несколько месяцев!</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+                        <a href="#courses" class="px-10 py-4 bg-white text-indigo-600 rounded-full font-semibold text-center hero-btn-primary transition duration-300 w-full">Выбрать курс</a>
+                        <a href="#contacts" class="px-10 py-4 border-2 border-white text-white rounded-full font-semibold text-center hero-btn-secondary transition duration-300 w-full">Бесплатная консультация</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container mx-auto px-6 mt-10">
+                <div class="flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Обучение в VED School" class="rounded-xl shadow-2xl w-full max-w-2xl h-auto object-cover">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6">
+                    <div class="text-4xl font-extrabold text-indigo-600 mb-2">1500+</div>
+                    <div class="text-gray-600 font-medium">Выпускников</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-extrabold text-indigo-600 mb-2">95%</div>
+                    <div class="text-gray-600 font-medium">Довольных студентов</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-extrabold text-indigo-600 mb-2">12</div>
+                    <div class="text-gray-600 font-medium">Направлений</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-extrabold text-indigo-600 mb-2">50+</div>
+                    <div class="text-gray-600 font-medium">Преподавателей</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Наши курсы</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">Выберите направление, которое соответствует вашим интересам и карьерным целям</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden course-card">
+                    <div class="h-48 bg-indigo-100 flex items-center justify-center">
+                        <i class="fas fa-code text-7xl text-indigo-600"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Веб-разработка</h3>
+                        <p class="text-gray-600 mb-5 leading-relaxed">Полный курс по созданию современных веб-приложений с нуля до профессионала.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-indigo-600 font-semibold">3 месяца</span>
+                            <span class="text-gray-800 font-extrabold text-lg">45 000 ₽</span>
+                        </div>
+                        <a href="#" class="block px-4 py-3 bg-indigo-600 text-white text-center rounded-lg font-semibold hover:bg-indigo-700 transition duration-300 shadow-md">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden course-card">
+                    <div class="h-48 bg-purple-100 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-7xl text-purple-600"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Мобильная разработка</h3>
+                        <p class="text-gray-600 mb-5 leading-relaxed">Создание приложений для iOS и Android с использованием современных технологий.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-purple-600 font-semibold">4 месяца</span>
+                            <span class="text-gray-800 font-extrabold text-lg">55 000 ₽</span>
+                        </div>
+                        <a href="#" class="block px-4 py-3 bg-purple-600 text-white text-center rounded-lg font-semibold hover:bg-purple-700 transition duration-300 shadow-md">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden course-card">
+                    <div class="h-48 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-7xl text-blue-600"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Data Science</h3>
+                        <p class="text-gray-600 mb-5 leading-relaxed">Анализ данных, машинное обучение и искусственный интеллект для бизнеса.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-blue-600 font-semibold">5 месяцев</span>
+                            <span class="text-gray-800 font-extrabold text-lg">65 000 ₽</span>
+                        </div>
+                        <a href="#" class="block px-4 py-3 bg-blue-600 text-white text-center rounded-lg font-semibold hover:bg-blue-700 transition duration-300 shadow-md">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden course-card">
+                    <div class="h-48 bg-green-100 flex items-center justify-center">
+                        <i class="fas fa-paint-brush text-7xl text-green-600"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">UX/UI Дизайн</h3>
+                        <p class="text-gray-600 mb-5 leading-relaxed">Проектирование интерфейсов и создание удобных цифровых продуктов.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-green-600 font-semibold">3 месяца</span>
+                            <span class="text-gray-800 font-extrabold text-lg">40 000 ₽</span>
+                        </div>
+                        <a href="#" class="block px-4 py-3 bg-green-600 text-white text-center rounded-lg font-semibold hover:bg-green-700 transition duration-300 shadow-md">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden course-card">
+                    <div class="h-48 bg-yellow-100 flex items-center justify-center">
+                        <i class="fas fa-ad text-7xl text-yellow-600"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Digital-маркетинг</h3>
+                        <p class="text-gray-600 mb-5 leading-relaxed">Продвижение бизнеса в интернете: SMM, контекстная реклама, SEO и аналитика.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-yellow-600 font-semibold">2 месяца</span>
+                            <span class="text-gray-800 font-extrabold text-lg">35 000 ₽</span>
+                        </div>
+                        <a href="#" class="block px-4 py-3 bg-yellow-600 text-white text-center rounded-lg font-semibold hover:bg-yellow-700 transition duration-300 shadow-md">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden course-card">
+                    <div class="h-48 bg-red-100 flex items-center justify-center">
+                        <i class="fas fa-gamepad text-7xl text-red-600"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Геймдизайн</h3>
+                        <p class="text-gray-600 mb-5 leading-relaxed">Создание игр: от концепции до реализации и монетизации.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-red-600 font-semibold">4 месяца</span>
+                            <span class="text-gray-800 font-extrabold text-lg">50 000 ₽</span>
+                        </div>
+                        <a href="#" class="block px-4 py-3 bg-red-600 text-white text-center rounded-lg font-semibold hover:bg-red-700 transition duration-300 shadow-md">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <a href="#" class="inline-block px-10 py-4 bg-indigo-600 text-white rounded-full font-semibold hover:bg-indigo-700 transition duration-300 shadow-lg hover:shadow-xl">Все курсы</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="advantages" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Почему выбирают VED School?</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">Наши преимущества, которые помогут вам достичь успеха</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-xl transition duration-300">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i class="fas fa-briefcase text-3xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Трудоустройство</h3>
+                    <p class="text-gray-600 leading-relaxed">Помогаем с составлением резюме, подготовкой к собеседованию и поиском работы у наших партнеров.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-xl transition duration-300">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i class="fas fa-user-tie text-3xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Практика</h3>
+                    <p class="text-gray-600 leading-relaxed">80% времени — практические задания и реальные проекты. Выпускной проект — кейс для портфолио.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-xl transition duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i class="fas fa-chalkboard-teacher text-3xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Эксперты</h3>
+                    <p class="text-gray-600 leading-relaxed">Преподаватели — практикующие специалисты из топовых компаний с опытом работы от 5 лет.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-xl transition duration-300">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i class="fas fa-laptop-code text-3xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Гибкий график</h3>
+                    <p class="text-gray-600 leading-relaxed">Онлайн-формат обучения с возможностью совмещать с работой или учебой. Доступ к материалам 24/7.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-xl transition duration-300">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i class="fas fa-users text-3xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Комьюнити</h3>
+                    <p class="text-gray-600 leading-relaxed">Доступ к закрытому сообществу выпускников, нетворкинг, менторская поддержка после обучения.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-xl transition duration-300">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i class="fas fa-certificate text-3xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Сертификат</h3>
+                    <p class="text-gray-600 leading-relaxed">Официальный сертификат, подтверждающий ваши навыки, который ценится работодателями.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Отзывы наших студентов</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">Узнайте, что говорят о нас те, кто уже прошел обучение</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-md testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user text-3xl text-indigo-600"></i>
+                        </div>
+                        <div class="ml-5">
+                            <h4 class="font-bold text-lg text-gray-800">Александр</h4>
+                            <p class="text-base text-gray-600">Веб-разработчик в Яндекс</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed">"Курс по веб-разработке превзошел все ожидания. Уже через 2 месяца обучения получил первое коммерческое предложение. Сейчас работаю в крупной IT-компании."</p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user text-3xl text-purple-600"></i>
+                        </div>
+                        <div class="ml-5">
+                            <h4 class="font-bold text-lg text-gray-800">Екатерина</h4>
+                            <p class="text-base text-gray-600">UX/UI дизайнер в Сбер</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed">"Перешла в дизайн из совершенно другой сферы. Преподаватели объясняли все очень доступно, а практические задания помогли быстро собрать портфолио. Трудоустроилась через месяц после выпуска."</p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user text-3xl text-blue-600"></i>
+                        </div>
+                        <div class="ml-5">
+                            <h4 class="font-bold text-lg text-gray-800">Дмитрий</h4>
+                            <p class="text-base text-gray-600">Data Scientist в Mail.ru</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed">"Курс по Data Science дал системные знания и практические навыки. Особенно ценными были реальные кейсы из бизнеса. После защиты дипломного проекта получил несколько офферов."</p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="teachers" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Наши преподаватели</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">Опытные практики, которые помогут вам освоить профессию</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <div class="h-64 teacher-placeholder flex items-center justify-center">
+                        <i class="fas fa-user-tie text-7xl text-gray-400 opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Иван Петров</h3>
+                        <p class="text-indigo-600 font-semibold mb-3">Lead Frontend Developer</p>
+                        <p class="text-gray-600 text-base leading-relaxed">10+ лет опыта в разработке. Работал в Яндекс, Tinkoff, Avito. Специализация: React, TypeScript, Next.js.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <div class="h-64 teacher-placeholder flex items-center justify-center">
+                        <i class="fas fa-user-tie text-7xl text-gray-400 opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Анна Смирнова</h3>
+                        <p class="text-purple-600 font-semibold mb-3">Senior UX/UI Designer</p>
+                        <p class="text-gray-600 text-base leading-relaxed">8 лет в дизайне интерфейсов. Работала в Сбер, МТС, ВТБ. Специализация: Figma, UX research, дизайн-системы.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <div class="h-64 teacher-placeholder flex items-center justify-center">
+                        <i class="fas fa-user-tie text-7xl text-gray-400 opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Сергей Козлов</h3>
+                        <p class="text-blue-600 font-semibold mb-3">Data Science Team Lead</p>
+                        <p class="text-gray-600 text-base leading-relaxed">12 лет в аналитике и машинном обучении. Работал в Mail.ru, Ozon, Tinkoff. Специализация: Python, ML, Big Data.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <div class="h-64 teacher-placeholder flex items-center justify-center">
+                        <i class="fas fa-user-tie text-7xl text-gray-400 opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Ольга Иванова</h3>
+                        <p class="text-green-600 font-semibold mb-3">Digital Marketing Director</p>
+                        <p class="text-gray-600 text-base leading-relaxed">9 лет в digital-маркетинге. Работал в Яндекс, Google, СберМаркет. Специализация: контекстная реклама, аналитика.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Частые вопросы</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">Ответы на самые популярные вопросы о наших курсах</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none py-2">
+                        <h3 class="text-xl font-semibold text-gray-800">Какой график обучения?</h3>
+                        <i class="fas fa-chevron-down text-indigo-600 transition-transform duration-300 transform"></i>
+                    </button>
+                    <div class="faq-answer mt-2 text-gray-600 leading-relaxed hidden">
+                        <p>Обучение проходит в удобном для вас темпе. Видеоуроки доступны 24/7, вебинары с преподавателями проходят 2-3 раза в неделю в вечернее время. Практические задания можно выполнять в любое удобное время.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none py-2">
+                        <h3 class="text-xl font-semibold text-gray-800">Нужны ли специальные знания для начала обучения?</h3>
+                        <i class="fas fa-chevron-down text-indigo-600 transition-transform duration-300 transform"></i>
+                    </button>
+                    <div class="faq-answer mt-2 text-gray-600 leading-relaxed hidden">
+                        <p>Большинство наших курсов рассчитаны на новичков и начинаются с основ. Для некоторых продвинутых программ могут потребоваться базовые знания, о чем мы предупреждаем заранее в описании курса.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none py-2">
+                        <h3 class="text-xl font-semibold text-gray-800">Как проходит трудоустройство после курса?</h3>
+                        <i class="fas fa-chevron-down text-indigo-600 transition-transform duration-300 transform"></i>
+                    </button>
+                    <div class="faq-answer mt-2 text-gray-600 leading-relaxed hidden">
+                        <p>Мы помогаем с составлением резюме и портфолио, проводим тренировочные собеседования. У нас есть партнерская программа с IT-компаниями, куда мы рекомендуем лучших выпускников. Также предоставляем доступ к закрытым вакансиям.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6 border-b border-gray-200 pb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none py-2">
+                        <h3 class="text-xl font-semibold text-gray-800">Есть ли рассрочка платежа?</h3>
+                        <i class="fas fa-chevron-down text-indigo-600 transition-transform duration-300 transform"></i>
+                    </button>
+                    <div class="faq-answer mt-2 text-gray-600 leading-relaxed hidden">
+                        <p>Да, мы предлагаем беспроцентную рассрочку на срок до 12 месяцев. Первый платеж составляет 30% от стоимости курса, остальная сумма разбивается на равные платежи.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none py-2">
+                        <h3 class="text-xl font-semibold text-gray-800">Можно ли вернуть деньги, если курс не подошел?</h3>
+                        <i class="fas fa-chevron-down text-indigo-600 transition-transform duration-300 transform"></i>
+                    </button>
+                    <div class="faq-answer mt-2 text-gray-600 leading-relaxed hidden">
+                        <p>Да, в течение 14 дней после начала обучения вы можете запросить полный возврат средств, если еще не получили доступ ко всем материалам курса. После этого срока возврат возможен пропорционально непройденным материалам.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Контакты</h2>
+                    <p class="text-gray-600 mb-8 max-w-md leading-relaxed">Остались вопросы? Свяжитесь с нами любым удобным способом, и мы с радостью на них ответим.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mr-4 shadow-sm">
+                                <i class="fas fa-map-marker-alt text-xl text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 text-lg">Адрес</h4>
+                                <p class="text-gray-600 text-base">Астана, ул. Мангилик Ел 18</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4 shadow-sm">
+                                <i class="fas fa-phone-alt text-xl text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 text-lg">Телефон</h4>
+                                <p class="text-gray-600 text-base">+7 (777) 777 7777</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4 shadow-sm">
+                                <i class="fas fa-envelope text-xl text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 text-lg">Email</h4>
+                                <p class="text-gray-600 text-base">info@vedschool.kz</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4 shadow-sm">
+                                <i class="fas fa-clock text-xl text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 text-lg">Часы работы</h4>
+                                <p class="text-gray-600 text-base">Пн-Пт: 10:00 - 19:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 hover:bg-indigo-200 transition duration-300 shadow-sm hover:shadow-md">
+                            <i class="fab fa-vk text-lg"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-200 transition duration-300 shadow-sm hover:shadow-md">
+                            <i class="fab fa-telegram text-lg"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:bg-red-200 transition duration-300 shadow-sm hover:shadow-md">
+                            <i class="fab fa-youtube text-lg"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition duration-300 shadow-sm hover:shadow-md">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 lg:pl-12">
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Напишите нам</h3>
+                        <form id="contact-form" action="https://formspree.io/f/xrbqnlrn" method="POST">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 font-semibold mb-2">Ваше имя</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="phone" class="block text-gray-700 font-semibold mb-2">Телефон</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 font-semibold mb-2">Сообщение</label>
+                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200" required></textarea>
+                            </div>
+                            <button type="submit" id="submit-button" class="w-full px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition duration-300 shadow-md hover:shadow-lg">Отправить сообщение</button>
+                            <div id="form-status-message" class="mt-4 text-center text-sm font-medium"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white font-bold text-xl shadow-sm">V</div>
+                        <span class="ml-3 text-xl font-bold">VED School</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm leading-relaxed">Школа цифровых профессий. Практическое обучение с трудоустройством.</p>
+                    <p class="text-gray-400 text-sm">© 2025 VED School. Все права защищены.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Курсы</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Веб-разработка</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Мобильная разработка</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Data Science</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">UX/UI Дизайн</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Digital-маркетинг</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Компания</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">О нас</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Преподаватели</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Отзывы</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Вакансии</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Блог</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Подписаться</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Будьте в курсе новостей и акций</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Ваш email" class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-800 w-full transition duration-200">
+                        <button type="submit" class="px-4 py-2 bg-indigo-600 rounded-r-lg hover:bg-indigo-700 transition duration-300">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-vk text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-telegram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-youtube text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-instagram text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0 text-sm">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 mr-4">Политика конфиденциальности</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">Условия использования</a>
+                </div>
+                <div class="text-gray-400 text-sm">
+                    Сделано с <i class="fas fa-heart text-red-400 mx-1"></i> для вашего будущего
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu       = document.getElementById('mobile-menu');
+  const mobileMenuClose  = document.getElementById('mobile-menu-close');
+  const mobileNavLinks   = document.querySelectorAll('.mobile-nav-link');
+
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.remove('translate-x-full');
+  });
+  mobileMenuClose.addEventListener ('click', () => {
+    mobileMenu.classList.add('translate-x-full');
+  });
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('translate-x-full');
+    });
+  });
+
+  document.querySelectorAll('#faq .faq-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const answer = button.nextElementSibling; 
+      const icon   = button.querySelector('i'); 
+
+      answer.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    });
+  });
+
+  const contactForm = document.getElementById('contact-form');
+  const submitButton = document.getElementById('submit-button');
+  const formStatusMessage = document.getElementById('form-status-message');
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitButton.disabled = true;
+    formStatusMessage.textContent = 'Отправка...';
+    formStatusMessage.className = 'mt-4 text-center text-sm font-medium text-gray-600';
+
+    const formData = new FormData(contactForm);
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        formStatusMessage.textContent = 'Сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.';
+        formStatusMessage.className = 'mt-4 text-center text-sm font-medium text-green-600';
+        contactForm.reset();
+      } else {
+        const data = await response.json();
+        if (data.errors) {
+          formStatusMessage.textContent = data.errors.map(error => error.message).join(', ');
+        } else {
+          formStatusMessage.textContent = 'Произошла ошибка при отправке сообщения.';
+        }
+        formStatusMessage.className = 'mt-4 text-center text-sm font-medium text-red-600';
+      }
+    } catch (error) {
+      formStatusMessage.textContent = 'Произошла ошибка сети. Пожалуйста, попробуйте еще раз.';
+      formStatusMessage.className = 'mt-4 text-center text-sm font-medium text-red-600';
+      console.error('Error submitting form:', error);
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+
+</script>
+
+</body>
+</html>
